@@ -1,0 +1,133 @@
+# Project: Student Management System
+# Problem Statement
+# Create a Student Management System using Python and Object-Oriented Programming (OOP).
+# The system should allow the user to:
+# Add a new student.
+# View all students.
+# Search for a student using Student ID.
+# Update a student's marks.
+# Delete a student record.
+# Display the student with the highest marks.
+# Exit the application.
+# Student Details
+# Each student should have:
+# Student IDclass Student:
+
+
+class Student:
+    def __init__(self, student_id, name, marks):
+        self.student_id = student_id
+        self.name = name
+        self.marks = marks
+
+    def display(self):
+        print("Student ID:", self.student_id)
+        print("Name:", self.name)
+        print("Marks:", self.marks)
+        print("-" * 30)
+
+
+
+class StudentManagementSystem:
+    def __init__(self):
+        self.students = []
+
+    def add_student(self):
+        student_id = input("Enter Student ID: ")
+        name = input("Enter Student Name: ")
+        marks = float(input("Enter Marks: ")) 
+ 
+        student = Student(student_id, name, marks)
+        self.students.append(student)
+        print("Student added successfully!")
+
+
+
+
+    def view_students(self):
+        if len(self.students) == 0:
+            print("No student records found.")
+        else:
+            for student in self.students:
+                student.display()
+    def search_student(self):
+        student_id = input("Enter Student ID to search: ")
+        for student in self.students:
+            if student.student_id == student_id:
+                print("Student found:")
+                student.display()
+                return
+        print("Student not found.")
+
+
+
+
+    def update_marks(self):
+        student_id = input("Enter Student ID to update marks: ")
+
+        for student in self.students:
+            if student.student_id == student_id:
+                new_marks = float(input("Enter new marks: "))
+                student.marks = new_marks
+                print("Marks updated successfully!")
+                return
+            print("Student not found.")
+
+ 
+
+    # Display highest marks student
+    def highest_marks_student(self):
+        if len(self.students) == 0:
+            print("No student records found.")
+            return
+
+        top_student = self.students[0]
+
+        for student in self.students:
+            if student.marks > top_student.marks:
+                top_student = student
+
+        print("Student with Highest Marks:")
+        top_student.display()
+
+
+# Main Program
+sms = StudentManagementSystem()
+
+while True:
+    print("===== Student Management System =====")
+    print("1. Add Student")
+    print("2. View All Students")
+    print("3. Search Student")
+    print("4. Update Student Marks")
+    print("5. Display Highest Marks Student")
+    print("6. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        sms.add_student()
+
+    elif choice == "2":
+        sms.view_students()
+
+    elif choice == "3":
+        sms.search_student()
+
+    elif choice == "4":
+        sms.update_marks()
+
+    # elif choice == "5":
+    #     sms.delete_student()
+
+    elif choice == "5":
+        sms.highest_marks_student()
+
+    elif choice == "6":
+        print("Exiting the application...")
+        break
+
+    else:
+        print("Invalid choice! Please try again.")
+
+            
